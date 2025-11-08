@@ -19,7 +19,7 @@ jobs:
     - name: Setup Go Environment
       uses: actions/setup-go@v6.0.0
       with:
-        go-version: '1.22'
+        go-version: '1.25.2'
 
     - name: validate app build
       run: |
