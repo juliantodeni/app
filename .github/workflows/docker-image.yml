@@ -22,7 +22,9 @@ jobs:
         go-version: '1.22'
 
     - name: validate app build
-      run: go build -v ./...
+      run: |
+        cd dev/go_web_app
+        go build -v ./...
 
     - name: login to registry
       uses: docker/login-action@v3.6.0
