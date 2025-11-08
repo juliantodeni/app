@@ -1,9 +1,10 @@
 # Stage 1: Build the Go binary
-FROM golang:1.22 AS builder
+FROM golang:1.25 AS builder
 WORKDIR /app
 COPY . .
-RUN go mod init myapp || true
-RUN go mod tidy
+# RUN go mod init myapp || true
+# RUN go mod tidy
+RUN go.mod download
 RUN go build -o server main.go
 
 # Stage 2: Run the binary
