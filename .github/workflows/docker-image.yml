@@ -47,4 +47,5 @@ jobs:
       with:
           context: dev/go_web_app
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/test-deni:latest
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels}}
