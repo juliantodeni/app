@@ -4,7 +4,7 @@ WORKDIR /app
 COPY . .
 # RUN go mod init myapp || true
 # RUN go mod tidy
-RUN go.mod download
+RUN go mod download
 RUN go build -o server main.go
 
 # Stage 2: Run the binary

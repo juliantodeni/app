@@ -32,9 +32,20 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+    - name: Extract metadata (tags, labels)
+      id: meta
+      uses: docker/metadata-action@v5
+      with:
+          images: denyyulianto/test-deni
+          tags: |
+            type=ref,event=branch
+            type=ref,event=tag
+            type=sha
+
     - name: Build and push Docker images
       uses: docker/build-push-action@v6.18.0
       with:
           context: dev/go_web_app
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/test-deni:latest
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels}}
