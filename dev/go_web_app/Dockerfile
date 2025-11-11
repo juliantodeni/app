@@ -5,7 +5,14 @@ COPY . .
 # RUN go mod init myapp || true
 # RUN go mod tidy
 RUN go mod download
-RUN go build -o server main.go
+#RUN go build -o server main.go
+
+# These args come automatically from Buildx
+ARG TARGETOS
+ARG TARGETARCH
+
+# Build for the correct architecture
+RUN CGO_ENABLED=0 GOOS=$TARGETOS GOARCH=$TARGETARCH go build -o server main.go
 
 # Stage 2: Run the binary
 FROM alpine:3.20
